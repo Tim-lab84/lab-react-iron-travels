@@ -2,7 +2,14 @@ import { useState } from "react";
 import travelPlansData from "../assets/travel-plans.json";
 
 const TravelList = () => {
-  const [travelPlans] = useState(travelPlansData);
+  const [travelPlans, setTravelPlans] = useState(travelPlansData);
+
+
+    const handleDelete = (id) =>{
+        setTravelPlans((prevPlans) => prevPlans.filter(plan => plan.id !== id))
+    }
+
+
 
   return (
     <div>
@@ -52,7 +59,7 @@ const labelAllInclusive = plan.allInclusive ? "All Inclusive!" : "";  //if true 
 
 
 
-              
+
               <div>
                 <h3>{plan.destination} ({plan.days} Days)</h3>
                 <p>{plan.description}</p>
@@ -64,6 +71,9 @@ const labelAllInclusive = plan.allInclusive ? "All Inclusive!" : "";  //if true 
                     {labelAllInclusive && label && " | "}
                     {labelAllInclusive && <span style={{ color: "blue", fontWeight: "bold" }}>{labelAllInclusive}</span>}
                   </p>
+
+
+                  <button onClick={()=> handleDelete(plan.id)} style={{backgroundColor: "darkgray"}}>Delete</button>
 
                   </div>
               </div>
